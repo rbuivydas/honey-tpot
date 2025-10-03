@@ -42,9 +42,44 @@ Victim Machine was set up on AWS EC2 virtual servers; therefore, a personal netw
 | 64297   | <VM_IP>/32 | Access to NGINX T-Pot Dashboard, where all the tools are used such as Kibana, Suricata, Elastic, Spiderfoot, etc. (all activity monitoring software) |
 | 64294   | <VM_IP>/32 | Access to T-Pot cockpit showing real-time activity and geographical map with ping updates |
 
-##  Create New Instance EC2
+###  Create New Instance EC2
 
-<img width="876" height="796" alt="Settings_New_Instance" src="https://github.com/user-attachments/assets/b30f2258-1720-4f5c-8b63-6b3431e4f607" />
+<img width="600" height="600" alt="Settings_New_Instance" src="https://github.com/user-attachments/assets/b30f2258-1720-4f5c-8b63-6b3431e4f607" />
+
+A new Amazon Machine Image (AMI) is created by selecting all the necessary features your VM requires. In this case, for T-Pot deployment, we used Debian 11 and selected t3.large as the virtual server type for enhanced processing speeds and smoothness throughout the full course of its running time. 
+
+t3.large consists of the following specifications:
+* 2 vCPUs
+* 8GiB RAM
+
+### Full Setup Parameters
+
+| Virtual Server Type | Storage Size | Operating System |
+| ------------------- | ------------ | ---------------- |
+| t3.large            | 128 GiB      | Debian 11        |
+
+Firewall Security Group would be the one that we set up earlier using the different ports, and ensuring that some ports are left open purposely and others closed off for restricted access or denial. In this case, it was named 'TPot-Security', which I selected to deploy with this configuration.
+
+### Key Pair Creation
+
+<img width="386" height="402" alt="Key_Pair_Creation" src="https://github.com/user-attachments/assets/1fee5756-f627-42b6-9847-b36b66092a98" />
+
+Key Pair creation is necessary for a secure and successful SSH connection between clients. Within the EC2 setup process, we create a PEM key pair file, which will appear as a '.pem' file on our machine, this key pair is then used to authenticate our connection via OpenSSH for later on in the project. The encryption mode that is used for PEM files is stated as RSA, which is the Rivest-Shamir-Adleman cryptography method (public + private keys relied upon).
+
+### Enabling Elastic IP Addresses
+
+<img width="400" height="400" alt="Elastic_IP_Addrs" src="https://github.com/user-attachments/assets/66bfce4d-94a0-44be-81db-87e47857ddf6" />
+
+We enable Elastic IP Addresses in order to make our IP address static for the whole duration of the instance, so if the instance is rebooted or turned off, we still retain the exact same IP address. The elastic IP address is allocated to your AWS account; each account has a different elastic IP address. The usage of elastic IP addresses allows for a seamless connection and removes the extra steps to alter information to match the 'changed IP address' each time the instance is rebooted.
+
+After all of these steps have been completed, we are ready to proceed with setting up the other parts of the honeypot project.
+
+## Establishing SSH Connection with AWS Virtual Server
+
+Luckily enough, AWS EC2 provides a simple guide on how to establish a SSH connection securely which is shown in the screenshot below, we follow this guide to use our PowerShell in gaining this SSH connection.
+
+<img width="400" height="400" alt="Connect-SSH-Show" src="https://github.com/user-attachments/assets/6a81a53f-d160-4586-b094-7d311ccdba13" />
+
 
 
 
